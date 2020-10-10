@@ -1,6 +1,6 @@
 # bingfeng_tmusic_player
 
-这是一个Minetest播放器，基于tmusic_player，更新日期：2020年08月19日。
+这是一个Minetest播放器，基于tmusic_player，更新日期：2020年10月11日。
 
 This mod based [tmusic_player](https://github.com/Tmanyo/tmusic_player "github").
 
