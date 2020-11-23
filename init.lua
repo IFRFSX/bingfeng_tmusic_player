@@ -17,6 +17,7 @@ function music_list()
 end
 
 function music_form(player)
+        minetest.log(player:get_player_name())
         minetest.show_formspec(player:get_player_name(), "tmusic_player:songs",
 		"size[12,12]" ..
 		"label[0,0;可以播放的歌曲(Playable songs)：]" ..
@@ -58,10 +59,11 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
                               		music_playing = minetest.sound_play(
 					song, {
                                    	gain = 10,
-                                   	to_player = minetest.get_connected_players()[1]:get_player_name(),
+                                   	to_player = player:get_player_name(),
 					loop = true
                               		})
                          	end
+                    
                		end
           	end
           	if fields.help then
@@ -106,7 +108,7 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
 					song = music.list[event.index]:gsub("%.ogg", "")
 					music_playing = minetest.sound_play(song, {
 					gain = 10,
-					to_player = minetest.get_connected_players()[1]:get_player_name()
+					to_player = player:get_player_name()
 					})
 				end
 			end
