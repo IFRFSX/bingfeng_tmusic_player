@@ -58,20 +58,26 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
                               		music_playing = minetest.sound_play(
 					song, {
                                    	gain = 10,
-                                   	to_player = minetest.get_connected_players(),
+                                   	to_player = minetest.get_connected_players()[1]:get_player_name(),
 					loop = true
                               		})
                          	end
                		end
           	end
           	if fields.help then
+          	--[[
+              	for x,y in pairs(minetest.get_connected_players()) do
+              	    minetest.log("前：" .. x .. "||后：" .. y:get_player_name())
+              	end
+          	--]]
                		minetest.show_formspec(player:get_player_name(),
 			"tmusic_player:help",
                         "size[9,9]" ..
                     	"label[4,0;帮助]" ..
                     	"label[.25,.5;添加音乐：]" ..
                     	"label[0,1;本程序只支持OGG Vorbis格式的音频，\n" ..
-			"您需要转换音乐格式为ogg，并且将文件名设置为“tmusic_player_xyz.ogg”，\n" ..
+			"您需要转换音乐格式为ogg，并且将文件名设置为\n" ..
+			"“tmusic_player_xyz.ogg”，\n" ..
 			"而'xyz'就是播放器在使用时显示的名称，\n" .. 
 			"然后将这个文件放入“sounds”文件夹。]" ..
 			"label[.25,3;播放：请在聊天中输入“/music”，]" ..
@@ -97,11 +103,10 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
 					music_playing)
 				end
 				if music_playing == nil then
-					song = music.list[event.index]:gsub(
-					"%.ogg", "")
+					song = music.list[event.index]:gsub("%.ogg", "")
 					music_playing = minetest.sound_play(song, {
 					gain = 10,
-					to_player = minetest.get_connected_players()
+					to_player = minetest.get_connected_players()[1]:get_player_name()
 					})
 				end
 			end
